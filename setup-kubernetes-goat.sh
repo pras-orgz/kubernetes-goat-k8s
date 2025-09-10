@@ -4,7 +4,7 @@
 # Kubernetes Goat setup and manage vulnerable infrastructure
 
 # Checking kubectl setup
-microk8s kubectl version > /dev/null 2>&1 
+k8s kubectl version > /dev/null 2>&1 
 if [ $? -eq 0 ];
 then
     echo "kubectl setup looks good."
@@ -35,24 +35,24 @@ fi
 
 # deploying insecure-rbac scenario
 echo "deploying insecure super admin scenario"
-microk8s kubectl apply -f scenarios/insecure-rbac/setup.yaml
+k8s kubectl apply -f scenarios/insecure-rbac/setup.yaml
 
 # deploying helm chart to verify the setup
 echo "deploying helm chart metadata-db scenario"
-microk8s helm install metadata-db scenarios/metadata-db/
+k8s helm install metadata-db scenarios/metadata-db/
 
 # setup the scenarios/configurations
 echo 'deploying the vulnerable scenarios manifests'
-microk8s kubectl apply -f scenarios/batch-check/job.yaml
-microk8s kubectl apply -f scenarios/build-code/deployment.yaml
-microk8s kubectl apply -f scenarios/cache-store/deployment.yaml
-microk8s kubectl apply -f scenarios/health-check/deployment.yaml
-microk8s kubectl apply -f scenarios/hunger-check/deployment.yaml
-microk8s kubectl apply -f scenarios/internal-proxy/deployment.yaml
-microk8s kubectl apply -f scenarios/kubernetes-goat-home/deployment.yaml
-microk8s kubectl apply -f scenarios/poor-registry/deployment.yaml
-microk8s kubectl apply -f scenarios/system-monitor/deployment.yaml
-microk8s kubectl apply -f scenarios/hidden-in-layers/deployment.yaml
+k8s kubectl apply -f scenarios/batch-check/job.yaml
+k8s kubectl apply -f scenarios/build-code/deployment.yaml
+k8s kubectl apply -f scenarios/cache-store/deployment.yaml
+k8s kubectl apply -f scenarios/health-check/deployment.yaml
+k8s kubectl apply -f scenarios/hunger-check/deployment.yaml
+k8s kubectl apply -f scenarios/internal-proxy/deployment.yaml
+k8s kubectl apply -f scenarios/kubernetes-goat-home/deployment.yaml
+k8s kubectl apply -f scenarios/poor-registry/deployment.yaml
+k8s kubectl apply -f scenarios/system-monitor/deployment.yaml
+k8s kubectl apply -f scenarios/hidden-in-layers/deployment.yaml
 
 echo 'Successfully deployed Kubernetes Goat. Have fun learning Kubernetes Security!'
 echo 'Ensure pods are in running status before running access-kubernetes-goat.sh script'
